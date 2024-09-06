@@ -6,7 +6,7 @@ const ButtomComponent = ({style, text = "Text Buttom", state, setState}) => {
         <>
             <TouchableOpacity
                 style={{width:'100%'}}
-                onPress={() => setState(!state)}
+                onPress={() => setState(state)}
             >
                 <View style={styles.button}>
                     <Text style={styles.text}>{text}</Text>

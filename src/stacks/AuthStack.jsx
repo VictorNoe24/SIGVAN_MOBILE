@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {createStackNavigator} from "@react-navigation/stack";
 import AuthScreen from "../screens/auth/AuthScreen";
 import SplashScreen from "../screens/auth/SplashScreen";
+import Tabs from "./Tabs";
 
 const Stack = createStackNavigator();
 
@@ -32,13 +33,21 @@ const AuthStacks = () => {
 
     return (
         <Stack.Navigator>
-            <Stack.Screen
-                name="AuthStacks"
-                component={AuthScreen}
-                options={{
-                    headerShown: false
-                }}
-            />
+            {userToken !== null ? (
+                <Stack.Screen
+                    name="SinIn"
+                    component={AuthScreen}
+                    options={{
+                        headerShown: false
+                    }}
+                />
+            ) : (
+                <Stack.Screen
+                    name='Home'
+                    component={Tabs}
+                />
+            )}
+
         </Stack.Navigator>
     );
 }

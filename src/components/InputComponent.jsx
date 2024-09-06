@@ -7,6 +7,8 @@ const InputComponent = (
         titleRight = null,
         name,
         isName,
+        secure = false,
+        placeholder = null
     }) => {
 
     return (
@@ -19,6 +21,8 @@ const InputComponent = (
                 style={styles.input}
                 onChangeText={isName}
                 value={name}
+                secureTextEntry={secure}
+                placeholder={placeholder}
             />
         </>
     )
