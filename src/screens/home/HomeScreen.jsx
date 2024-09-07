@@ -4,7 +4,7 @@ import {StyleSheet, Text} from "react-native";
 const HomeScreen = () => {
     return (
         <>
-            <Text>Hola</Text>
+            <Text>Home Screen</Text>
         </>
     )
 }
