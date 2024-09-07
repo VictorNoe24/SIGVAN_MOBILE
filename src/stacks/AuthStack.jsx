@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {createStackNavigator} from "@react-navigation/stack";
 import AuthScreen from "../screens/auth/AuthScreen";
 import SplashScreen from "../screens/auth/SplashScreen";
@@ -11,13 +12,11 @@ const AuthStacks = () => {
     const [userToken, setUserToken] = useState(null);
 
     const getUserToken = async () => {
-        // testing purposes
-        const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
         try {
-            // custom logic
-            await sleep(2000);
-            const token = null;
-            setUserToken(token);
+            const jsonValue = await AsyncStorage.getItem('AUTH_USER_TOKEN');
+            return setUserToken(jsonValue != null ? JSON.parse(jsonValue) : null);
+        } catch(e) {
+            logger.error(e);
         } finally {
             setIsLoading(false);
         }
@@ -33,7 +32,7 @@ const AuthStacks = () => {
 
     return (
         <Stack.Navigator>
-            {userToken !== null ? (
+            {userToken === null ? (
                 <Stack.Screen
                     name="SinIn"
                     component={AuthScreen}

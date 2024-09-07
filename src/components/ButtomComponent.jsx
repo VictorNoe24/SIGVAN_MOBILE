@@ -1,12 +1,13 @@
 import React from "react";
 import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
 
-const ButtomComponent = ({style, text = "Text Buttom", state, setState}) => {
+const ButtomComponent = ({styleCustom, text = "Text Buttom", state, setState}) => {
     return (
         <>
             <TouchableOpacity
                 style={{width:'100%'}}
-                onPress={() => setState(state)}
+                disabled={state}
+                onPress={() => setState(!state)}
             >
                 <View style={styles.button}>
                     <Text style={styles.text}>{text}</Text>

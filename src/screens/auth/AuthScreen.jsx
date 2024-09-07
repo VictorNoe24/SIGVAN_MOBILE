@@ -2,11 +2,13 @@ import React, {useState, useRef, useEffect} from 'react';
 import {Animated, Image, StyleSheet, Text, View} from "react-native";
 import InputComponent from "../../components/InputComponent";
 import ButtomComponent from "../../components/ButtomComponent";
+import Checkbox from 'expo-checkbox';
 
 const AuthScreen = () => {
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
     const [buttom, setButtom] = useState()
+    const [isChecked, setChecked] = useState(false);
 
     const fadeAnim = useRef(new Animated.Value(0)).current;
 
@@ -33,25 +35,42 @@ const AuthScreen = () => {
                 />
             </Animated.View>
             <Text style={styles.title}>Bienvenido de nuevo</Text>
-            <Text style={styles.subTitle}>Bienvenido de nuevo</Text>
+            <Text style={styles.subTitle}>Por favor ingresa tus datos para iniciar sesión</Text>
             <InputComponent
                 titleLeft={'Correo Electronico'}
                 name={email}
                 isName={setEmail}
                 type={'text'}
+                placeholder={'example@example.com'}
             />
             <InputComponent
                 titleLeft={'Contraseña'}
                 name={password}
                 isName={setPassword}
                 type={'text'}
+                secure={true}
+                titleRight={'¿Olvidaste tu contraseña?'}
+                placeholder={' • • • • • • • • • • • • • •'}
             />
+            <View style={styles.section}>
+                <Checkbox
+                    style={styles.checkbox}
+                    value={isChecked}
+                    onValueChange={setChecked}
+                    color={isChecked ? '#FF520D' : undefined}
+                />
+                <Text style={styles.paragraph}>Recordarme</Text>
+            </View>
             <ButtomComponent
                 text={'Iniciar Sesión'}
                 state={buttom}
                 setState={setButtom}
             />
-            <Text style={styles.subTitle}>¿Aun no tienes cuenta? registrate</Text>
+            <View style={[styles.section, { justifyContent: 'center', marginTop: 22 }]}>
+                <Text style={{fontSize: 16, alignSelf: 'center', fontWeight: 'bold'}}>¿Aun no tienes cuenta? </Text>
+                <Text style={{fontSize: 16, alignSelf: 'center', fontWeight: 'bold', color: '#FF520D'}}>registrate</Text>
+            </View>
+
         </View>
     )
 }
@@ -65,19 +84,33 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
     },
     image: {
-        width: 150,
-        height: 150,
+        width: 100,
+        height: 100,
     },
     title: {
         fontSize: 24,
         fontWeight: 'bold',
-        marginBottom: 25,
         alignSelf: 'center',
+        marginTop: 20,
     },
     subTitle: {
         fontSize: 16,
         alignSelf: 'center',
-    }
+        marginBottom: 40,
+    },
+    section: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        width: '100%',
+        marginBottom: 26,
+    },
+    paragraph: {
+        fontSize: 16,
+        fontWeight: 'bold'
+    },
+    checkbox: {
+        margin: 8,
+    },
 })
 
 export default AuthScreen;
