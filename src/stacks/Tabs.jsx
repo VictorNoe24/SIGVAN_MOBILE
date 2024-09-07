@@ -1,8 +1,12 @@
 import React from 'react';
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
-import HomeScreen from "../screens/tabar/HomeScreen";
 import Icon from 'react-native-vector-icons/Ionicons';
 import {StyleSheet, TouchableOpacity} from "react-native";
+import HomeScreen from "../screens/home/HomeScreen";
+import SearchScreen from "../screens/search/SearchScreen";
+import SalesScreen from "../screens/sales/SalesScreen";
+import ProfileScreen from "../screens/profile/ProfileScreen";
+import AddScreen from "../screens/options/AddScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -27,11 +31,12 @@ const Tabs = () => {
                     ),
                     tabBarLabel: 'Inicio',
                     tabBarLabelStyle: styles.customLabel,
+
                 }}
             />
             <Tab.Screen
                 name="SearchScreen"
-                component={HomeScreen}
+                component={SearchScreen}
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <Icon name="search" size={24} color={focused ? '#FF520D' : 'gray'} />
@@ -43,7 +48,7 @@ const Tabs = () => {
 
             <Tab.Screen
                 name="MoreOptions"
-                component={HomeScreen}
+                component={AddScreen}
                 options={{
                     tabBarIcon: () => null,
                     tabBarButton: (props) => (
@@ -59,7 +64,7 @@ const Tabs = () => {
 
             <Tab.Screen
                 name="SalesScreen"
-                component={HomeScreen}
+                component={SalesScreen}
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <Icon name="bar-chart" size={24} color={focused ? '#FF520D' : 'gray'} />
@@ -70,7 +75,7 @@ const Tabs = () => {
             />
             <Tab.Screen
                 name="ProfileScreen"
-                component={HomeScreen}
+                component={ProfileScreen}
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <Icon name="person" size={24} color={focused ? '#FF520D' : 'gray'} />
