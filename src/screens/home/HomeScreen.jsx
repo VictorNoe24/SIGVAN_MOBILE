@@ -1,14 +1,24 @@
 import React from 'react';
-import {StyleSheet, Text} from "react-native";
+import {ScrollView, StatusBar, StyleSheet, Text, View} from "react-native";
 
 const HomeScreen = () => {
     return (
-        <>
-            <Text>Home Screen</Text>
-        </>
+        <ScrollView>
+            <StatusBar style={'light-content'} backgroundColor='#fff'/>
+            <View style={styles.container}>
+                <Text>Home Screen</Text>
+            </View>
+        </ScrollView>
     )
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        padding: 17,
+        backgroundColor: '#fff',
+    }
+})
 
 export default HomeScreen;
