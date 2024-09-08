@@ -18,8 +18,9 @@ const Tabs = () => {
                 tabBarShowLabel: true,
                 tabBarStyle: styles.tabBarStyle,
                 tabBarLabelStyle: {
-                    fontSize: 12, // Cambia el tamaño del texto
+                    fontSize: 12,
                 },
+                headerStatusBarHeight: 1
             }}
         >
             <Tab.Screen
@@ -30,8 +31,7 @@ const Tabs = () => {
                         <Icon name="home" size={24} color={focused ? '#FF520D' : 'gray'} />
                     ),
                     tabBarLabel: 'Inicio',
-                    tabBarLabelStyle: styles.customLabel,
-
+                    tabBarLabelStyle: styles.customLabel
                 }}
             />
             <Tab.Screen

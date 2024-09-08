@@ -6,13 +6,16 @@ import Checkbox from 'expo-checkbox';
 import {useAuth} from "../../context/AuthContext";
 import {useNavigation} from "@react-navigation/native";
 import {validateEmail, validatePassword} from "../../utils/validate";
+import {loginAPI} from "../../db/apis/API_AUTH";
+import {LOGGER} from "../../utils/env";
 
 const AuthScreen = () => {
     const navigate = useNavigation();
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
     const [isChecked, setChecked] = useState(false);
-    const {} = useAuth();
+    const [state, setState] = useState(false)
+    const {setUserToken, SignIn, Storage} = useAuth();
 
     const fadeAnim = useRef(new Animated.Value(0)).current;
 
@@ -22,14 +25,29 @@ const AuthScreen = () => {
             duration: 5000,
             useNativeDriver: true,
         }).start();
-    }
+    };
+
+    const login = async (email, password) => {
+        try {
+            setState(true);
+            const response = await loginAPI(email, password);
+            if (response !== undefined && response !== null) {
+                setUserToken(response);
+                await Storage(response)
+            }
+        } catch (e) {
+            LOGGER.error(e);
+        } finally {
+            setState(false);
+        }
+    };
 
     const initialInput = (typeVar, functions) => {
         if ( typeVar !== null ) {
             return functions(typeVar)
         }
         return true;
-    }
+    };
 
     useEffect(() => {
         openLogo();
@@ -83,7 +101,8 @@ const AuthScreen = () => {
             </View>
             <ButtonComponent
                 text={'Iniciar Sesión'}
-                disable={false}
+                disable={state}
+                func={()=>login(email, password)}
             />
             <View style={[styles.section, { justifyContent: 'center', marginTop: 22 }]}>
                 <Text style={{fontSize: 16, alignSelf: 'center', fontWeight: 'bold'}}>¿Aun no tienes cuenta? </Text>

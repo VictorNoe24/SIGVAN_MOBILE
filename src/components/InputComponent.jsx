@@ -11,7 +11,7 @@ const InputComponent = (
         placeholder = null,
         validate = () => true,
         errorMessage  = 'Fallo algo',
-        keyboardType = 'default'
+        keyboardType = 'default',
     }) => {
 
     return (
