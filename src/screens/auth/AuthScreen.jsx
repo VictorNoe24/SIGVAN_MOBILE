@@ -5,12 +5,12 @@ import ButtonComponent from "../../components/ButtonComponent";
 import Checkbox from 'expo-checkbox';
 import {useAuth} from "../../context/AuthContext";
 import {useNavigation} from "@react-navigation/native";
+import {validateEmail, validatePassword} from "../../utils/validate";
 
 const AuthScreen = () => {
     const navigate = useNavigation();
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
-    const [buttom, setButtom] = useState()
     const [isChecked, setChecked] = useState(false);
     const {} = useAuth();
 
@@ -22,6 +22,13 @@ const AuthScreen = () => {
             duration: 5000,
             useNativeDriver: true,
         }).start();
+    }
+
+    const initialInput = (typeVar, functions) => {
+        if ( typeVar !== null ) {
+            return functions(typeVar)
+        }
+        return true;
     }
 
     useEffect(() => {
@@ -40,13 +47,18 @@ const AuthScreen = () => {
             </Animated.View>
             <Text style={styles.title}>Bienvenido de nuevo</Text>
             <Text style={styles.subTitle}>Por favor ingresa tus datos para iniciar sesión</Text>
+
             <InputComponent
                 titleLeft={'Correo Electronico'}
                 name={email}
                 isName={setEmail}
                 type={'text'}
                 placeholder={'example@example.com'}
+                validate={() => initialInput(email, validateEmail)}
+                errorMessage={'Correo electrónico inválido'}
+                keyboardType={'email-address'}
             />
+
             <InputComponent
                 titleLeft={'Contraseña'}
                 name={password}
@@ -55,7 +67,11 @@ const AuthScreen = () => {
                 secure={true}
                 titleRight={'¿Olvidaste tu contraseña?'}
                 placeholder={' • • • • • • • • • • • • • •'}
+                validate={() => initialInput(password, validatePassword)}
+                errorMessage={'Contraseña invalida'}
+                keyboardType={'password'}
             />
+
             <View style={styles.section}>
                 <Checkbox
                     style={styles.checkbox}
@@ -73,7 +89,11 @@ const AuthScreen = () => {
                 <Text style={{fontSize: 16, alignSelf: 'center', fontWeight: 'bold'}}>¿Aun no tienes cuenta? </Text>
                 <Text
                     style={{fontSize: 16, alignSelf: 'center', fontWeight: 'bold', color: '#FF520D'}}
-                    onPress={() => navigate.navigate('SignUp')}
+                    onPress={() => {
+                        setEmail(null)
+                        setPassword(null)
+                        navigate.navigate('SignUp')
+                    }}
                 >registrate</Text>
             </View>
 

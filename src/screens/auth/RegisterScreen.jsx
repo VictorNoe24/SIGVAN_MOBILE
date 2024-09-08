@@ -4,6 +4,13 @@ import ButtonComponent from "../../components/ButtonComponent";
 import InputComponent from "../../components/InputComponent";
 import { logger } from "react-native-logs";
 import {registerAPI} from "../../db/apis/API_AUTH";
+import {
+    validateEmail,
+    validateLastname,
+    validateName,
+    validatePassword, validatePasswordConfirm,
+    validatePhoneNumber
+} from "../../utils/validate";
 
 const log = logger.createLogger();
 
@@ -14,7 +21,7 @@ const RegisterScreen = () => {
     const [phone, setPhone] = useState(null)
     const [email, setEmail] = useState(null)
     const [password, setPassword] = useState(null)
-    const [validatePassword, setValidatePassword] = useState(null)
+    const [valiPassword, setValiPassword] = useState(null)
     const [state, setState] = useState(false)
 
     const insertUser = async () => {
@@ -29,6 +36,13 @@ const RegisterScreen = () => {
         }
     }
 
+    const initialInput = (typeVar, functions) => {
+        if ( typeVar !== null ) {
+            return functions(typeVar)
+        }
+        return true;
+    }
+
     return (
         <ScrollView>
             <View style={styles.container}>
@@ -40,6 +54,8 @@ const RegisterScreen = () => {
                     placeholder={'Ingresa tu nombre(s)'}
                     name={name}
                     isName={setName}
+                    validate={() => initialInput(name, validateName)}
+                    errorMessage={'El o los nombres solo deben contener letras.'}
                 />
                 <InputComponent
                     titleLeft={'Apellido(s)'}
@@ -47,6 +63,8 @@ const RegisterScreen = () => {
                     placeholder={'Ingresa tu apellido(s)'}
                     name={lastname}
                     isName={setLastname}
+                    validate={() => initialInput(lastname, validateLastname)}
+                    errorMessage={'El o los apellidos solo deben contener letras.'}
                 />
                 <InputComponent
                     titleLeft={'Número Telefono'}
@@ -54,6 +72,9 @@ const RegisterScreen = () => {
                     placeholder={'Ingresa numero telefonico'}
                     name={phone}
                     isName={setPhone}
+                    keyboardType={'numeric'}
+                    validate={() => initialInput(phone, validatePhoneNumber)}
+                    errorMessage={'El número telefonico es incorrecto.'}
                 />
                 <InputComponent
                     titleLeft={'Correo Electronico'}
@@ -61,6 +82,9 @@ const RegisterScreen = () => {
                     placeholder={'Ingresa correo electronico'}
                     name={email}
                     isName={setEmail}
+                    validate={() => initialInput(email, validateEmail)}
+                    errorMessage={'Correo electrónico inválido.'}
+                    keyboardType={'email-address'}
                 />
                 <InputComponent
                     titleLeft={'Contraseña'}
@@ -69,14 +93,25 @@ const RegisterScreen = () => {
                     placeholder={' • • • • • • • • • • • • • •'}
                     name={password}
                     isName={setPassword}
+                    validate={() => initialInput(password, validatePassword)}
+                    errorMessage={'La contraseña debe tener mayusculas, minusculas, numeros, carascteres especiales y un minimo de 8 caracteres.'}
+                    keyboardType={'password'}
                 />
                 <InputComponent
                     titleLeft={'Confirmar Contraseña'}
                     type={'text'}
                     secure={true}
                     placeholder={' • • • • • • • • • • • • • •'}
-                    name={validatePassword}
-                    isName={setValidatePassword}
+                    name={valiPassword}
+                    isName={setValiPassword}
+                    validate={() => {
+                        if ( valiPassword !== null ) {
+                            return validatePasswordConfirm(password, valiPassword);
+                        }
+                        return true;
+                    }}
+                    errorMessage={'La contraseña no coincide'}
+                    keyboardType={'password'}
                 />
                 <ButtonComponent
                     text={'Siguiente'}

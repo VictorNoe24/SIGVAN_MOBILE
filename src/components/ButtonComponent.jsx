@@ -1,5 +1,5 @@
 import React from "react";
-import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {ActivityIndicator, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {logger} from "react-native-logs";
 
 const log = logger.createLogger();
@@ -12,8 +12,15 @@ const ButtonComponent = ({text = "Text Buttom", disable, func = ()=>{log.info('N
                 disabled={disable}
                 onPress={func}
             >
-                <View style={[styles.button, !disable ? {backgroundColor: '#FF520D'} : {backgroundColor: 'gray'}]}>
-                    <Text style={styles.text}>{text}</Text>
+                <View style={styles.button}>
+                    { !disable ? (
+                        <Text style={styles.text}>{text}</Text>
+                    ) : (
+                        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                            <Text style={styles.text}>Cargando </Text>
+                            <ActivityIndicator color="#fff"/>
+                        </View>
+                    )}
                 </View>
             </TouchableOpacity>
         </>

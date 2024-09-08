@@ -1,6 +1,14 @@
 import * as SQLite from "expo-sqlite";
 import {databaseName, LOGGER} from "../../utils/env";
 
+export const loginAPI = async () => {
+  try {
+
+  } catch (e) {
+    LOGGER.error(e);
+  }
+}
+
 export const registerAPI = async (name, lastname, phone, email, password, id_status) => {
   try {
     const db = await SQLite.openDatabaseAsync(databaseName);
@@ -12,6 +20,6 @@ export const registerAPI = async (name, lastname, phone, email, password, id_sta
     LOGGER.info('Se registro correctamente el usuario con ID: ', result.lastInsertRowId);
     return result.lastInsertRowId;
   } catch (e) {
-      log.error(e);
+      LOGGER.error(e);
   }
 }

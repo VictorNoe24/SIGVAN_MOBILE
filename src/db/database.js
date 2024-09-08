@@ -1,8 +1,5 @@
 import * as SQLite from 'expo-sqlite';
-import { logger } from "react-native-logs";
-import {databaseName} from "../utils/env";
-
-const log = logger.createLogger();
+import {databaseName, LOGGER} from "../utils/env";
 
 export const CreateTables = async () => {
     try {
@@ -115,9 +112,9 @@ export const CreateTables = async () => {
             
             INSERT OR IGNORE INTO status (type_name) VALUES ('activo'), ('inactivo'), ('reembolso'), ('pagado'), ('adeudo');
         `);
-        log.info('Se crearon correctamente las tablas');
+        LOGGER.info('Se crearon correctamente las tablas');
     } catch (e) {
-        log.error(e);
+        LOGGER.error(e);
     }
 }
 
@@ -205,8 +202,8 @@ export const CreateTriggers = async () => {
                 UPDATE repayments SET updated_at = CURRENT_TIMESTAMP WHERE id_repayment = OLD.id_repayment;
             END;
         `);
-        log.info('Se crearon correctamente los triggers');
+        LOGGER.info('Se crearon correctamente los triggers');
     } catch (e) {
-        log.error(e);
+        LOGGER.error(e);
     }
 }
