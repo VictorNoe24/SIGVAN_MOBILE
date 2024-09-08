@@ -67,13 +67,13 @@ const AuthScreen = () => {
             <Text style={styles.subTitle}>Por favor ingresa tus datos para iniciar sesión</Text>
 
             <InputComponent
-                titleLeft={'Correo Electronico'}
+                titleLeft={'Correo Electrónico'}
                 name={email}
                 isName={setEmail}
                 type={'text'}
                 placeholder={'example@example.com'}
                 validate={() => initialInput(email, validateEmail)}
-                errorMessage={'Correo electrónico inválido'}
+                errorMessage={'Correo electrónico inválido.'}
                 keyboardType={'email-address'}
             />
 
@@ -86,7 +86,7 @@ const AuthScreen = () => {
                 titleRight={'¿Olvidaste tu contraseña?'}
                 placeholder={' • • • • • • • • • • • • • •'}
                 validate={() => initialInput(password, validatePassword)}
-                errorMessage={'Contraseña invalida'}
+                errorMessage={'Contraseña invalida.'}
                 keyboardType={'password'}
             />
 

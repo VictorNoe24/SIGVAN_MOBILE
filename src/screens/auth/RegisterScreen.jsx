@@ -74,7 +74,7 @@ const RegisterScreen = () => {
                     isName={setPhone}
                     keyboardType={'numeric'}
                     validate={() => initialInput(phone, validatePhoneNumber)}
-                    errorMessage={'El número telefonico es incorrecto.'}
+                    errorMessage={'El número telefónico es incorrecto.'}
                 />
                 <InputComponent
                     titleLeft={'Correo Electronico'}
@@ -94,11 +94,11 @@ const RegisterScreen = () => {
                     name={password}
                     isName={setPassword}
                     validate={() => initialInput(password, validatePassword)}
-                    errorMessage={'La contraseña debe tener mayusculas, minusculas, numeros, carascteres especiales y un minimo de 8 caracteres.'}
+                    errorMessage={'La contraseña debe tener mayúsculas, minúsculas, números, caracteres especiales y un mínimo de 8 caracteres.'}
                     keyboardType={'password'}
                 />
                 <InputComponent
-                    titleLeft={'Confirmar Contraseña'}
+                    titleLeft={'Confirmar Contraseña.'}
                     type={'text'}
                     secure={true}
                     placeholder={' • • • • • • • • • • • • • •'}
@@ -110,7 +110,7 @@ const RegisterScreen = () => {
                         }
                         return true;
                     }}
-                    errorMessage={'La contraseña no coincide'}
+                    errorMessage={'La contraseña no coincide.'}
                     keyboardType={'password'}
                 />
                 <ButtonComponent
