@@ -3,7 +3,7 @@ import {StyleSheet, Text, TextInput, View} from "react-native";
 
 const InputComponent = (
     {
-        titleLeft = null,
+        titleLeft = 'Label',
         titleRight = null,
         name,
         isName,
@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
         borderRadius: 6,
         padding: 10,
         marginBottom: 26,
+        borderColor: '#9CA1A4',
     },
     text_1: {
         fontSize: 14,

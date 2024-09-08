@@ -1,14 +1,18 @@
 import React, {useState, useRef, useEffect} from 'react';
 import {Animated, Image, StyleSheet, Text, View} from "react-native";
 import InputComponent from "../../components/InputComponent";
-import ButtomComponent from "../../components/ButtomComponent";
+import ButtonComponent from "../../components/ButtonComponent";
 import Checkbox from 'expo-checkbox';
+import {useAuth} from "../../context/AuthContext";
+import {useNavigation} from "@react-navigation/native";
 
 const AuthScreen = () => {
+    const navigate = useNavigation();
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
     const [buttom, setButtom] = useState()
     const [isChecked, setChecked] = useState(false);
+    const {} = useAuth();
 
     const fadeAnim = useRef(new Animated.Value(0)).current;
 
@@ -61,14 +65,16 @@ const AuthScreen = () => {
                 />
                 <Text style={styles.paragraph}>Recordarme</Text>
             </View>
-            <ButtomComponent
+            <ButtonComponent
                 text={'Iniciar Sesión'}
-                state={buttom}
-                setState={setButtom}
+                disable={false}
             />
             <View style={[styles.section, { justifyContent: 'center', marginTop: 22 }]}>
                 <Text style={{fontSize: 16, alignSelf: 'center', fontWeight: 'bold'}}>¿Aun no tienes cuenta? </Text>
-                <Text style={{fontSize: 16, alignSelf: 'center', fontWeight: 'bold', color: '#FF520D'}}>registrate</Text>
+                <Text
+                    style={{fontSize: 16, alignSelf: 'center', fontWeight: 'bold', color: '#FF520D'}}
+                    onPress={() => navigate.navigate('SignUp')}
+                >registrate</Text>
             </View>
 
         </View>
