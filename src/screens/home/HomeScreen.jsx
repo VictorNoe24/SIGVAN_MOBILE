@@ -1,7 +1,6 @@
 import React, {useEffect, useState, useCallback} from 'react';
 import {
     ActivityIndicator, Image,
-    ImageBackground,
     RefreshControl,
     ScrollView,
     StatusBar,
