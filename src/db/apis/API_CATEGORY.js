@@ -10,8 +10,19 @@ export const getAllCategory = async () => {
                     WHERE id_user=? 
                     ORDER BY name_category DESC 
                     LIMIT 10;`,
-            [userId]
+            [await userId]
         );
+    } catch (e) {
+        LOGGER.error(e);
+    }
+};
+
+export const insertCategory = async (nameCategory) => {
+    try {
+        const db = await SQLite.openDatabaseAsync(databaseName)
+        return await db.runAsync(
+            `INSERT INTO categories (name_category, id_user, id_status) VALUES (?, ?, 1);`,
+            [nameCategory, await userId])
     } catch (e) {
         LOGGER.error(e);
     }
