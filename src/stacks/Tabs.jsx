@@ -17,6 +17,7 @@ const Tabs = () => {
             screenOptions={{
                 headerShown: false,
                 tabBarShowLabel: true,
+                tabBarHideOnKeyboard: true,
                 animationEnabled: true,
                 ...TransitionPresets.SlideFromRightIOS,
             }}
