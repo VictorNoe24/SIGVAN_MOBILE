@@ -28,6 +28,7 @@ export const AuthProvider = ({ children }) => {
     const SignOut = async () => {
         try {
             await AsyncStorage.removeItem('AUTH_USER_TOKEN')
+            await SignIn();
         } catch(e) {
             LOGGER.error(e);
         }
