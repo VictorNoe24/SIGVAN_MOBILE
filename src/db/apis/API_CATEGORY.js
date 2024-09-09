@@ -1,15 +1,21 @@
 import * as SQLite from "expo-sqlite";
 import {databaseName, LOGGER} from "../../utils/env";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const getAllCategory = async () => {
     try {
+        const jsonValue = await AsyncStorage.getItem('AUTH_USER_TOKEN');
+        const data = JSON.parse(jsonValue);
+
         const db = await SQLite.openDatabaseAsync(databaseName)
-        const result = await db.getFirstAsync(
-            'SELECT * FROM users WHERE email=? AND password=?',
-            [email, password]
+        return await db.getAllAsync(
+            `SELECT * 
+                    FROM categories 
+                    WHERE id_user=? 
+                    ORDER BY name_category DESC 
+                    LIMIT 10;`,
+            [data?.id_user]
         );
-        LOGGER.info('Se a podido iniciar sesión: ', result);
-        return result;
     } catch (e) {
         LOGGER.error(e);
     }
