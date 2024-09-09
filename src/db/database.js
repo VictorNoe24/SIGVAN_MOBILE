@@ -109,8 +109,6 @@ export const CreateTables = async () => {
                 FOREIGN KEY (id_user) REFERENCES users (id_user),
                 FOREIGN KEY (id_product) REFERENCES products (id_product)
             );
-            
-            INSERT OR IGNORE INTO status (type_name) VALUES ('activo'), ('inactivo'), ('reembolso'), ('pagado'), ('adeudo');
         `);
         LOGGER.info('Se crearon correctamente las tablas');
     } catch (e) {
