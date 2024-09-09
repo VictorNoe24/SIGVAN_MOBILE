@@ -10,7 +10,7 @@ const CardComponent = (
     }
 ) => {
     return (
-        <View>
+        <View style={styles.constructor}>
             <TouchableOpacity
                 onPress={()=>LOGGER.info(id)}
                 style={styles.card}
@@ -29,16 +29,28 @@ const CardComponent = (
 
 const styles = StyleSheet.create({
     card: {
+        backgroundColor: '#f0f0f0',
         width: 126,
         height: 126,
+        borderRadius: 16,
         marginRight: 15,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 5 },
+        shadowOpacity: 0.2,
+        shadowRadius: 10,
+        elevation: 8,
+        borderWidth: 1,
+        borderColor: '#ddd',
+    },
+    constructor: {
+        backgroundColor: '#fff',
+        width: '100%',
     },
     container: {
         flex: 1,
         padding: 20,
-        borderWidth: 1,
         borderRadius: 16,
-        backgroundColor: '#D9D9D9',
+        backgroundColor: '#f5f5f5',
     },
     text_container: {
         top: "80%",

@@ -109,7 +109,7 @@ const HomeScreen = () => {
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
                     >
-                        {!productsState &&products.map((product, index) => (
+                        {!productsState && products.map((product, index) => (
                             <View key={index}>
                                 <CardComponent id={product?.id_product} title={product?.name_product}/>
                             </View>
@@ -129,6 +129,7 @@ const HomeScreen = () => {
                         </View>
                     )}
                 </View>
+
             </View>
         </ScrollView>
     )

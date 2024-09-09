@@ -1,12 +1,12 @@
 import React from 'react';
-import {ImageBackground, StyleSheet, Text, TouchableOpacity, View} from "react-native";
-import {LOGGER} from "../../../utils/env";
+import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { LOGGER } from "../../../utils/env";
 
-const CardHeaderComponent = ({image = null}) => {
+const CardHeaderComponent = ({ image = null }) => {
     return (
         <View style={styles.constructor}>
             <TouchableOpacity
-                onPress={()=>LOGGER.info('Category')}
+                onPress={() => LOGGER.info('Category')}
                 style={styles.card}
             >
                 <ImageBackground
@@ -14,32 +14,44 @@ const CardHeaderComponent = ({image = null}) => {
                     style={styles.container}
                     borderRadius={16}
                 >
-                    <Text>No hay anuncios</Text>
+                    <Text style={styles.text}>No hay anuncios</Text>
                 </ImageBackground>
             </TouchableOpacity>
         </View>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 20,
-        borderWidth: 1,
+    card: {
+        backgroundColor: '#f0f0f0',
+        width: '100%',
+        height: 201,
         borderRadius: 16,
-        backgroundColor: '#D9D9D9',
+        marginRight: 15,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 5 },
+        shadowOpacity: 0.2,
+        shadowRadius: 10,
+        elevation: 8,
+        borderWidth: 1,
+        borderColor: '#ddd',
     },
     constructor: {
         backgroundColor: '#fff',
         width: '100%',
     },
-    card: {
-        backgroundColor: '#D9D9D9',
-        width: '100%',
-        height: 201,
+    container: {
+        flex: 1,
+        padding: 20,
         borderRadius: 16,
-        marginRight: 15,
-    }
+        backgroundColor: '#f5f5f5',
+    },
+    text: {
+        color: '#333',
+        fontSize: 16,
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
 });
 
 export default CardHeaderComponent;
