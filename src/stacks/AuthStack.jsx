@@ -5,9 +5,9 @@ import SplashScreen from "../screens/auth/SplashScreen";
 import Tabs from "./Tabs";
 import {useAuth} from "../context/AuthContext";
 import RegisterScreen from "../screens/auth/RegisterScreen";
-import {StyleSheet} from "react-native";
 import {CreateTables, CreateTriggers} from "../db/database";
 import {LOGGER} from "../utils/env";
+import AddStack from "./AddStack";
 
 const Stack = createStackNavigator();
 
@@ -51,7 +51,6 @@ const AuthStacks = () => {
                         options={{
                             headerTitle: 'Registrar Usuario',
                             headerTitleAlign: 'center',
-                            headerTitleStyle: styles.customLabel,
                         }}
                     />
                     <Stack.Screen
@@ -60,22 +59,26 @@ const AuthStacks = () => {
                     />
                 </>
             ) : (
-                <Stack.Screen
-                    name='Home'
-                    component={Tabs}
-                    options={{
-                        headerShown: false,
-                    }}
-                />
+                <>
+                    <Stack.Screen
+                        name='Home'
+                        component={Tabs}
+                        options={{
+                            headerShown: false,
+                        }}
+                    />
+                    <Stack.Screen
+                        name='AddStack'
+                        component={AddStack}
+                        options={{
+                            headerShown: false,
+                        }}
+                    />
+                </>
+
             )}
         </Stack.Navigator>
     );
 }
-
-const styles = StyleSheet.create({
-    customLabel: {
-
-    }
-})
 
 export default AuthStacks;

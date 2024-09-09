@@ -7,6 +7,7 @@ import SalesScreen from "../screens/sales/SalesScreen";
 import ProfileScreen from "../screens/profile/ProfileScreen";
 import CustomTabBar from "./CustomTabBar";
 import { TransitionPresets } from '@react-navigation/stack';
+import AddScreen from "../screens/options/AddScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -25,7 +26,7 @@ const Tabs = () => {
         >
             <Tab.Screen name="HomeScreen" component={HomeScreen}/>
             <Tab.Screen name="SearchScreen" component={SearchScreen} />
-            <Tab.Screen name="AddScreen" component={SalesScreen}/>
+            <Tab.Screen name="AddScreen" component={AddScreen}/>
             <Tab.Screen name="SalesScreen" component={SalesScreen}/>
             <Tab.Screen name="ProfileScreen" component={ProfileScreen}/>
         </Tab.Navigator>
