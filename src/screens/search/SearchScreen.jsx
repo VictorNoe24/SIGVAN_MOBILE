@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {Image, ScrollView, StyleSheet, Text, View} from "react-native";
-import SearchInputComponent from "./components/SearchInputComponent";
+import SearchInputComponent from "../../components/SearchInputComponent";
 import CardProductsComponent from "./components/CardProductsComponent";
 import {LOGGER} from "../../utils/env";
 import {getAllProducts} from "../../db/apis/API_PRODUCTS";
+import NoSearchComponent from "../../components/NoSearchComponent";
 
 const SearchScreen = () => {
     const [products, setProducts] = useState([])
@@ -37,14 +38,7 @@ const SearchScreen = () => {
                     </View>
                 ))}
             </ScrollView>
-            <View style={{height:'100%', width: '100%'}}>
-                <Image
-                    style={styles.image}
-                    source={require('../../../assets/image/not_search.png')}
-                />
-                <Text style={styles.title}>No se encontro productos</Text>
-            </View>
-
+            <NoSearchComponent/>
         </View>
     )
 };
@@ -56,19 +50,6 @@ const styles = StyleSheet.create({
         width: '100%',
         padding: 17,
     },
-    image: {
-        flexDirection: 'column',
-        width: '40%',
-        height: '50%',
-        alignSelf: 'center',
-        justifyContent: 'center'
-    },
-    title: {
-        fontSize: 16,
-        fontWeight: 'bold',
-        alignSelf: 'center',
-        color: '#FF520D',
-    }
 })
 
 export default SearchScreen;

@@ -8,6 +8,7 @@ import {useNavigation} from "@react-navigation/native";
 import {validateEmail, validatePassword} from "../../utils/validate";
 import {loginAPI} from "../../db/apis/API_AUTH";
 import {LOGGER} from "../../utils/env";
+import {ToastModal} from "../../utils/Alerts";
 
 const AuthScreen = () => {
     const navigate = useNavigation();
@@ -33,10 +34,12 @@ const AuthScreen = () => {
             const response = await loginAPI(email, password);
             if (response !== undefined && response !== null) {
                 setUserToken(response);
-                await Storage(response)
+                return await Storage(response)
             }
+            ToastModal('Fallo de login', 'Correo o contraseña incorrecta','DANGER');
         } catch (e) {
             LOGGER.error(e);
+            ToastModal('Fallo de login', 'Correo o contraseña incorrecta','DANGER');
         } finally {
             setState(false);
         }
