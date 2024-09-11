@@ -14,6 +14,7 @@ const SplashScreen = () => {
                 await Updates.fetchUpdateAsync();
                 await Updates.reloadAsync();
             }
+            ToastModal('Actualizado', 'Se actualizo correctamente','SUCCESS');
         } catch (e) {
             LOGGER.error(e);
         }
