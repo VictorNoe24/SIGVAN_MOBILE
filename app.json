@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "VentasUX",
-    "slug": "Finanzas",
+    "slug": "VentasUX",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -31,11 +31,22 @@
     },
     "extra": {
       "eas": {
-        "projectId": "1abf90a5-4f92-4e56-8f95-e1aaa0f0fcea"
+        "projectId": "1abf90a5-4f92-4e56-8f95-e1aaa0f0fcea",
+        "enabled": true,
+        "checkAutomatically": "ON_LOAD",
+        "fallbackToCacheTimeout": 0
       }
     },
     "updates": {
       "url": "https://u.expo.dev/1abf90a5-4f92-4e56-8f95-e1aaa0f0fcea"
-    }
+    },
+    "plugins": [
+      [
+        "expo-updates",
+        {
+          "username": "victornoe"
+        }
+      ]
+    ]
   }
 }
