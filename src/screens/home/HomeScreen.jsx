@@ -13,6 +13,7 @@ import CardHeaderComponent from "./components/CardHeaderComponent";
 import {getAllCategory} from "../../db/apis/API_CATEGORY";
 import {LOGGER} from "../../utils/env";
 import {getAllRecentProducts} from "../../db/apis/API_PRODUCTS";
+import {useFocusEffect} from "@react-navigation/native";
 
 const HomeScreen = () => {
     const [refreshing, setRefreshing] = React.useState(false);
@@ -57,6 +58,13 @@ const HomeScreen = () => {
             setProductsState(false)
         }
     }
+
+    useFocusEffect(
+        useCallback(() => {
+            getAllCategories();
+            getAllProducts();
+        }, [])
+    );
 
     useEffect(() => {
         getAllCategories();

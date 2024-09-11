@@ -1,15 +1,26 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {StyleSheet, TouchableOpacity, View} from "react-native";
 import Ionicons from '@expo/vector-icons/Ionicons';
+import {useNavigation} from "@react-navigation/native";
 
 const ButtonFloatComponent = (
     {
-        icon = <Ionicons name="add-sharp" size={24} color="white" />
+        icon = <Ionicons name="add-sharp" size={24} color="white" />,
+        screen = 'undefined'
     }
 ) => {
+
+    const navigation = useNavigation();
+    const NavigateScreen = (screen) => {
+        navigation.navigate("AddStack", {
+            screen: screen,
+        })
+    }
+
     return (
         <View style={styles.container}>
             <TouchableOpacity
+                onPress={()=>{NavigateScreen(screen)}}
                 style={styles.button}
             >
                 {icon}
