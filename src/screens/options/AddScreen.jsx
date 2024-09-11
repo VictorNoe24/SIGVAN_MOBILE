@@ -12,7 +12,7 @@ const AddScreen = () => {
                 showsVerticalScrollIndicator={false}
             >
                 <CardAddComponent
-                    title={'Categorias'}
+                    title={'Categorías'}
                     icon={<MaterialIcons name="category" size={48} color="#FF520D" />}
                     screen={'AllCategory'}
                 />

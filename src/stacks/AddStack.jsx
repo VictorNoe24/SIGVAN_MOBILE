@@ -13,7 +13,7 @@ const AddStack = () => {
                 name="AllCategory"
                 component={CategoryScreen}
                 options={{
-                    headerTitle: 'Categorias', headerTitleAlign: "center"
+                    headerTitle: 'Categorías', headerTitleAlign: "center"
                 }}
             />
             <Stack.Screen
@@ -28,7 +28,7 @@ const AddStack = () => {
                 name="AddCategoryForm"
                 component={AddCategoryScreen}
                 options={{
-                    headerTitle: 'Agregar Categoria', headerTitleAlign: "center"
+                    headerTitle: 'Agregar Categoría', headerTitleAlign: "center"
                 }}
             />
             <Stack.Screen

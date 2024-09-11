@@ -84,7 +84,7 @@ const HomeScreen = () => {
             <View style={styles.container}>
                 <CardHeaderComponent/>
 
-                <Text style={styles.title}>Categorias</Text>
+                <Text style={styles.title}>Categorías</Text>
                 <View style={styles.row}>
                     <ScrollView
                         horizontal={true}
