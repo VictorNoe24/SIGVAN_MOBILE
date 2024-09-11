@@ -27,10 +27,10 @@ jobs:
       - name: Install EAS CLI
         run: npm install -g eas-cli
 
-      - name: Login to Expo
+      - name: Login to Expo using Token
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-        run: expo login --token $EXPO_TOKEN
+        run: eas whoami || expo login --token $EXPO_TOKEN
 
       - name: EAS Update to Production
         run: eas update --channel production --auto
