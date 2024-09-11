@@ -23,6 +23,9 @@ const AddCategoryScreen = () => {
 
     const registerCategori = async () => {
         try {
+            if (!validateName(nameCategory)) {
+                return ToastModal('ERROR', 'Llena todos los campos','DANGER');
+            }
             setStateButton(true)
             const response = await insertCategory(nameCategory);
             LOGGER.info(response.lastInsertRowId)

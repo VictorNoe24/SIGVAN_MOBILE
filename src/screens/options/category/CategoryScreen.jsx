@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {ScrollView, StyleSheet, Text, View} from "react-native";
+import {ScrollView, StyleSheet, View} from "react-native";
 import ButtonFloatComponent from "../../../components/ButtonFloatComponent";
 import {getAllCategory} from "../../../db/apis/API_CATEGORY";
 import {LOGGER} from "../../../utils/env";
