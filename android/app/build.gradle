@@ -109,7 +109,7 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.finanzas"
+    namespace "com.victornoe.Finanzas"
     defaultConfig {
         applicationId 'com.victornoe.Finanzas'
         minSdkVersion rootProject.ext.minSdkVersion
