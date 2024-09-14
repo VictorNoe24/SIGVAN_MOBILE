@@ -16,7 +16,7 @@ const CardComponent = (
                 style={styles.card}
             >
                 <ImageBackground
-                    source={image !== null ? image : require('../../../../assets/image/no_photo.png')}
+                    source={image !== null ? {uri: image} : require('../../../../assets/image/no_photo.png')}
                     style={styles.container}
                     borderRadius={16}
                 >

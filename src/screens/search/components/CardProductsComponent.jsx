@@ -1,7 +1,7 @@
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 
-const CardProductsComponent = () => {
+const CardProductsComponent = ({image = null, name = 'Name', category = 'Category', price = 0.0}) => {
     return (
         <View style={styles.container}>
             <TouchableOpacity
@@ -9,13 +9,13 @@ const CardProductsComponent = () => {
                 onPress={() => {console.log('hola')}}
             >
                 <Image
-                    source={require('../../../../assets/image/no_photo.png')}
+                    source={image !== null ? {uri: image} : require('../../../../assets/image/no_photo.png')}
                     style={styles.image}
                 />
                 <View style={{gap: 7}}>
-                    <Text style={styles.title}>Ropa deportiva hombre</Text>
-                    <Text style={styles.subtitle}>Adidas</Text>
-                    <Text style={[styles.subtitle, {color: '#FF520D'}]}>$999.99</Text>
+                    <Text style={styles.title}>{name}</Text>
+                    <Text style={styles.subtitle}>{category}</Text>
+                    <Text style={[styles.subtitle, {color: '#FF520D'}]}>${price}</Text>
                 </View>
             </TouchableOpacity>
         </View>

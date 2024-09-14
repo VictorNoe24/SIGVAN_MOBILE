@@ -28,6 +28,9 @@ const RegisterScreen = () => {
         try {
             setState(true)
             const response = await registerAPI(name, lastname, phone, email, password, 1);
+            if (response !== undefined && response !== null) {
+
+            }
             log.info(response)
         } catch (e) {
             log.error(e);

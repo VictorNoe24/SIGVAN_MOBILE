@@ -26,7 +26,7 @@ export const CreateTables = async () => {
             CREATE TABLE IF NOT EXISTS companies (
                 id_company INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
                 image_company TEXT NOT NULL,
-                name_company VARCHAR(150) NOT NULL,
+                name_company VARCHAR(150) NOT NULL UNIQUE,
                 country VARCHAR(50) NOT NULL,
                 address VARCHAR(150) NOT NULL,
                 id_user INTEGER NOT NULL,
@@ -35,7 +35,7 @@ export const CreateTables = async () => {
             
             CREATE TABLE IF NOT EXISTS categories (
                 id_category INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-                name_category VARCHAR(50) NOT NULL,
+                name_category VARCHAR(50) NOT NULL UNIQUE,
                 id_user INTEGER NOT NULL,
                 id_status INTEGER NOT NULL,
                 FOREIGN KEY (id_user) REFERENCES users (id_user),
@@ -49,15 +49,16 @@ export const CreateTables = async () => {
                 purchase_price DOUBLE NOT NULL,
                 sale_price DOUBLE NOT NULL,
                 stock INTEGER NOT NULL,
-                sold INTEGER NOT NULL,
                 bar_code LONG NOT NULL,
                 discount DOUBLE NULL,
                 created_at TIMESTAMP DEFAULT (datetime('now', 'localtime')) NOT NULL,
                 updated_at TIMESTAMP DEFAULT (datetime('now', 'localtime')) NOT NULL,
                 id_user INTEGER NOT NULL,
                 id_status INTEGER NOT NULL,
+                id_category INTEGER NOT NULL,
                 FOREIGN KEY (id_user) REFERENCES users (id_user),
-                FOREIGN KEY (id_status) REFERENCES status (id_status)
+                FOREIGN KEY (id_status) REFERENCES status (id_status),
+                FOREIGN KEY (id_category) REFERENCES categories (id_category)
             );
             
             CREATE TABLE IF NOT EXISTS photo_products (
@@ -109,6 +110,8 @@ export const CreateTables = async () => {
                 FOREIGN KEY (id_user) REFERENCES users (id_user),
                 FOREIGN KEY (id_product) REFERENCES products (id_product)
             );
+            
+            INSERT OR IGNORE INTO status (type_name) VALUES ('activo'), ('inactivo'), ('reembolso'), ('pagado'), ('adeudo');
         `);
         LOGGER.info('Se crearon correctamente las tablas');
     } catch (e) {

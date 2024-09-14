@@ -26,3 +26,13 @@ export const validatePhoneNumber = (phoneNumber) => {
 export const validatePasswordConfirm = (password, confirmPassword) => {
     return password === confirmPassword && validatePassword(confirmPassword);
 }
+
+export const validatePrice = (price) => {
+    const priceRegex = /^\d+(\.\d{1,2})?$/;
+    return priceRegex.test(price) && price > 0;
+}
+
+export const validateInteger = (number) => {
+    const integerRegex = /^-?\d+$/;
+    return integerRegex.test(number);
+}

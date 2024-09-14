@@ -4,6 +4,7 @@ import Fontisto from '@expo/vector-icons/Fontisto';
 
 const CardCategoryComponent = (
     {
+        image = null,
         idCategory= 0,
         nameCategory = 'name',
     }
@@ -12,7 +13,7 @@ const CardCategoryComponent = (
         <View key={idCategory} style={styles.container}>
             <Image
                 style={styles.image}
-                source={require('../../../../../assets/image/no_photo.png')}
+                source={image !== null ? {uri: image} : require('../../../../../assets/image/no_photo.png')}
             />
             <Text style={styles.name}>{nameCategory}</Text>
             <View style={styles.options}>

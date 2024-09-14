@@ -28,3 +28,22 @@ export const insertCategory = async (nameCategory) => {
     }
 };
 
+export const getAllCategoriesModel = async () => {
+    try {
+        const data = [];
+        const db = await SQLite.openDatabaseAsync(databaseName)
+        for await (const row of db.getEachAsync(
+            `SELECT * 
+                    FROM categories 
+                    WHERE id_user=? 
+                    ORDER BY name_category DESC;`,
+            [await userId]
+        )) {
+            data.push({key:row.id_category, value:row.name_category})
+        }
+        return data;
+    } catch (e) {
+        LOGGER.error(e);
+    }
+}
+
