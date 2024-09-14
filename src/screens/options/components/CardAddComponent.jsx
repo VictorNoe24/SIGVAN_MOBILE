@@ -54,6 +54,13 @@ const styles = StyleSheet.create({
         padding: 15,
         borderRadius: 16,
         borderWidth: 1,
+        borderColor: '#bdbdbd',
+        shadowColor:  'black',
+        shadowOffset: { width: 0, height: 5 },
+        shadowOpacity: 0.15,
+        shadowRadius: 10,
+        elevation: 6,
+        borderCurve: 'continuous',
     },
     text: {
         fontSize: 16,
