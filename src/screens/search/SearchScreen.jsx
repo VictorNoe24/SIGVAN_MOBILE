@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {Image, ScrollView, StyleSheet, Text, View} from "react-native";
 import SearchInputComponent from "../../components/SearchInputComponent";
 import CardProductsComponent from "./components/CardProductsComponent";
 import {LOGGER} from "../../utils/env";
 import {getAllProducts} from "../../db/apis/API_PRODUCTS";
 import NoSearchComponent from "../../components/NoSearchComponent";
+import {useFocusEffect} from "@react-navigation/native";
 
 const SearchScreen = () => {
     const [products, setProducts] = useState([])
@@ -21,6 +22,12 @@ const SearchScreen = () => {
         }
     }
 
+    useFocusEffect(
+        useCallback(() => {
+            getAllProduct()
+        }, [])
+    );
+
     useEffect(() => {
         getAllProduct();
     }, []);
@@ -34,11 +41,18 @@ const SearchScreen = () => {
             >
                 {!productsState && products.map((product, index) => (
                     <View key={index}>
-                        <CardProductsComponent/>
+                        <CardProductsComponent
+                            image={product?.images[0]}
+                            name={product?.name_product}
+                            category={product?.name_category}
+                            price={product?.sale_price}
+                        />
                     </View>
                 ))}
             </ScrollView>
-            <NoSearchComponent/>
+            {products.length === 0 && (
+                <NoSearchComponent/>
+            )}
         </View>
     )
 };

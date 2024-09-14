@@ -8,5 +8,5 @@ const getIdUser = async () => {
 }
 
 export const LOGGER = logger.createLogger();
-export const databaseName = 'test_database_002.db'
+export const databaseName = 'test_database_003.db'
 export const userId = getIdUser();
