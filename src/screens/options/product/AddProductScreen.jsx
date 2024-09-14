@@ -45,6 +45,7 @@ const AddProductScreen = () => {
     };
 
     const registerProduct = async () => {
+        setStateButton(true);
         const barCodeGenerated = generateBarCode(nameProduct);
         const data = {
             nameProduct,
@@ -63,20 +64,22 @@ const AddProductScreen = () => {
                     LOGGER.error(`Error: ${key} está vacío o es nulo`);
                     return ToastModal('Campos incompletos', 'Llena todo el formulario', 'DANGER');
                 }
-                const response = await insertProducts(data);
-                if (response.lastInsertRowId !== undefined) {
-                    const result = await insertPhotos(response.lastInsertRowId, imagesProducts);
-                    if (result) {
-                        ToastModal('Agregado', 'Producto agregado correctamente', 'SUCCESS');
-                        navigation.navigate("AddStack", {
-                            screen: 'AllProduct',
-                        });
-                    }
+            }
+
+            const response = await insertProducts(data);
+            if (response.lastInsertRowId !== undefined) {
+                const result = await insertPhotos(response.lastInsertRowId, imagesProducts);
+                if (result) {
+                    ToastModal('Agregado', 'Producto agregado correctamente', 'SUCCESS');
+                    navigation.navigate("AddStack", {
+                        screen: 'AllProduct',
+                    });
                 }
             }
-            ToastModal('Registrado', 'Se ha registrado un nuevo producto');
         } catch (e) {
             LOGGER.error("Error creando producto", e);
+        } finally {
+            setStateButton(false);
         }
     };
 
@@ -150,7 +153,7 @@ const AddProductScreen = () => {
                 />
                 <InputComponent
                     titleLeft={'Stock'}
-                    type={'texts'}
+                    type={'text'}
                     keyboardType={'numeric'}
                     placeholder={'Ingresa el número de stock del producto'}
                     name={stock}

@@ -119,7 +119,7 @@ const HomeScreen = () => {
                     >
                         {!productsState && products.map((product, index) => (
                             <View key={index}>
-                                <CardComponent id={product?.id_product} title={product?.name_product}/>
+                                <CardComponent id={product?.id_product} image={product?.images[0]} title={product?.name_product}/>
                             </View>
                         ))}
                         {productsState && (

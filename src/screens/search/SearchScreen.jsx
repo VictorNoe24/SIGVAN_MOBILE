@@ -14,6 +14,7 @@ const SearchScreen = () => {
     const getAllProduct = async () => {
         try {
             const data = await getAllProducts();
+            LOGGER.info(data.length)
             setProducts(data);
         } catch (e) {
             LOGGER.error(e);

@@ -39,10 +39,13 @@ const ProductScreen = () => {
                 showsVerticalScrollIndicator={false}
             >
                 {products.map((product, index) => (
-                    <CardCategoryComponent
-                        idCategory={product?.id_product}
-                        nameCategory={product?.name_product}
-                    />
+                    <View key={index}>
+                        <CardCategoryComponent
+                            image={product?.images[0]}
+                            idCategory={product?.id_product}
+                            nameCategory={product?.name_product}
+                        />
+                    </View>
                 ))}
             </ScrollView>
             {products.length === 0 && (
