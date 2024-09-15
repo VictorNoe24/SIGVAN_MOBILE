@@ -1,12 +1,30 @@
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {useNavigation} from "@react-navigation/native";
 
-const CardProductsComponent = ({image = null, name = 'Name', category = 'Category', price = 0.0}) => {
+const CardProductsComponent = (
+    {
+        image = null,
+        name = 'Name',
+        id = 0,
+        category = 'Category',
+        price = 0.0,
+        navigate = null
+    }
+) => {
+
+    const navigation = useNavigation();
+
     return (
         <View style={styles.container}>
             <TouchableOpacity
                 style={styles.card}
-                onPress={() => {console.log('hola')}}
+                onPress={() => {
+                    navigation.navigate('SearchStack', {
+                        screen: navigate,
+                        params: {id: id}
+                    })
+                }}
             >
                 <Image
                     source={image !== null ? {uri: image} : require('../../../../assets/image/no_photo.png')}
