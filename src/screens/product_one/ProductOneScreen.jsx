@@ -46,8 +46,10 @@ const ProductOneScreen = ({route}) => {
                         title={product[0].name_product}
                         category={product[0].name_category}
                         sale_price={product[0].sale_price.toFixed(2)}
-                        stock={product[0].stock}
                         purchase_price={product[0].purchase_price.toFixed(2)}
+                        stock={product[0].stock}
+                        description={product[0].description}
+                        discount={product[0].discount}
                     />
                 </View>
             </ScrollView>

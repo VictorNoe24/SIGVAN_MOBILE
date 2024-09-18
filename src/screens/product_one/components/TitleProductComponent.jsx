@@ -9,8 +9,10 @@ const TitleProductComponent = (
         title = 'Nombre del producto',
         category = 'Categoria',
         sale_price = 1999.00,
+        purchase_price = 0.0,
+        discount = null,
         stock = 10,
-        purchase_price = 0.0
+        description = 'Lorem ipsum dolor sit amet consectetur. Tincidunt nascetur id dolor convallis ac lacus cursus. Egestas cursus sit ipsum facilisi pretium eget urna dignissim viverra. Nec arcu vulputate neque justo cursus lectus vel sollicitudin. Auctor dapibus diam sit proin id.'
     }
 ) => {
     return (
@@ -21,13 +23,14 @@ const TitleProductComponent = (
                     <Text>{category}</Text>
                 </View>
                 <View>
-                    <Text style={styles.title}>${sale_price.toLocaleString("en-IN")}</Text>
+                    <Text style={styles.title}>${discount != null ? discount.toLocaleString("en-IN") : sale_price.toLocaleString("en-IN")}</Text>
+                    {discount != null && (<Text style={[styles.subtitle, {textDecorationLine: 'line-through', color: '#ababab'}]}>${sale_price.toLocaleString("en-IN")}</Text>)}
                 </View>
             </View>
 
             <View style={{marginBottom: 20}}>
                 <Text style={styles.subtitle}>Descripción</Text>
-                <Text style={styles.text}>Lorem ipsum dolor sit amet consectetur. Tincidunt nascetur id dolor convallis ac lacus cursus. Egestas cursus sit ipsum facilisi pretium eget urna dignissim viverra. Nec arcu vulputate neque justo cursus lectus vel sollicitudin. Auctor dapibus diam sit proin id.</Text>
+                <Text style={styles.text}>{description}</Text>
             </View>
 
             <View style={{marginBottom: 20}}>
