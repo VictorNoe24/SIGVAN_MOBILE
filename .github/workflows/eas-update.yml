@@ -34,4 +34,4 @@ jobs:
         run: eas whoami || expo login --token $EXPO_TOKEN
 
       - name: EAS Update to Production
-        run: eas update --channel production --auto
+        run: eas update --channel preview --auto
