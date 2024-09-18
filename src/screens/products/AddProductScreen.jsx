@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { ScrollView, StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import * as ImagePicker from 'expo-image-picker';  // Importa ImagePicker
-import { LOGGER } from "../../../utils/env";
-import InputComponent from "../../../components/InputComponent";
-import { validateInteger, validateName, validatePrice } from "../../../utils/validate";
-import ButtonComponent from "../../../components/ButtonComponent";
+import { LOGGER } from "../../utils/env";
+import InputComponent from "../../components/InputComponent";
+import { validateInteger, validateName, validatePrice } from "../../utils/validate";
+import ButtonComponent from "../../components/ButtonComponent";
 import { SelectList } from "react-native-dropdown-select-list";
-import { getAllCategoriesModel } from "../../../db/apis/API_CATEGORY";
-import { ToastModal } from "../../../utils/Alerts";
-import {insertPhotos, insertProducts} from "../../../db/apis/API_PRODUCTS";
+import { getAllCategoriesModel } from "../../db/apis/API_CATEGORY";
+import { ToastModal } from "../../utils/Alerts";
+import {insertPhotos, insertProducts} from "../../db/apis/API_PRODUCTS";
 import { useNavigation } from "@react-navigation/native";
 
 const AddProductScreen = () => {

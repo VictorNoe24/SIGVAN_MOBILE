@@ -1,8 +1,26 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, TextInput, TouchableOpacity, View} from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
+import {useNavigation} from "@react-navigation/native";
 
-const SearchInputComponent = () => {
+const SearchInputComponent = ({fuctions = ()=> {}}) => {
+    const [isFocused, setIsFocused] = useState(false);
+    const navigation = useNavigation();
+
+    const handleFocus = () => {
+        setIsFocused(true);
+        navigation.getParent()?.setOptions({
+            tabBarStyle: { display: 'none' },
+        });
+    };
+
+    const handleBlur = () => {
+        setIsFocused(false);
+        navigation.getParent()?.setOptions({
+            tabBarStyle: { display: 'flex' },
+        });
+    };
+
     return (
         <View style={styles.container}>
             <View style={styles.row}>
@@ -14,13 +32,16 @@ const SearchInputComponent = () => {
                 <TextInput
                     style={styles.input}
                     placeholder={'Buscar productos'}
-                    onChangeText={(text) => console.log(text)}
+                    onChangeText={(value) => fuctions(value)}
+                    onFocus={handleFocus}
+                    onBlur={handleBlur}
                 />
             </View>
             <TouchableOpacity
                 style={styles.button}
                 onPress={() => {
-                    console.log('hola')}}
+                    console.log('Escanear código QR');
+                }}
             >
                 <Icon
                     name={'qr-code-outline'}
@@ -29,7 +50,7 @@ const SearchInputComponent = () => {
                 />
             </TouchableOpacity>
         </View>
-    )
+    );
 };
 
 const styles = StyleSheet.create({
@@ -62,6 +83,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderColor: '#9CA1A4',
     },
-})
+});
 
 export default SearchInputComponent;

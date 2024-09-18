@@ -8,6 +8,7 @@ import RegisterScreen from "../screens/auth/RegisterScreen";
 import {CreateTables, CreateTriggers} from "../db/database";
 import {LOGGER} from "../utils/env";
 import AddStack from "./AddStack";
+import SearchStack from "./SearchStack";
 
 const Stack = createStackNavigator();
 
@@ -72,6 +73,13 @@ const AuthStacks = () => {
                         component={AddStack}
                         options={{
                             headerShown: false,
+                        }}
+                    />
+                    <Stack.Screen
+                        name={'SearchStack'}
+                        component={SearchStack}
+                        options={{
+                            headerShown: false
                         }}
                     />
                 </>
