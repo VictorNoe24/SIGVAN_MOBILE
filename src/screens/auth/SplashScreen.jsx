@@ -1,7 +1,6 @@
 import React, {useEffect} from 'react';
 import {ActivityIndicator, Image, StyleSheet, Text, View} from "react-native";
 import * as Updates from 'expo-updates';
-import {LOGGER} from "../../utils/env";
 import {ToastModal} from "../../utils/Alerts";
 
 const SplashScreen = () => {
@@ -10,13 +9,11 @@ const SplashScreen = () => {
         try {
             const update = await Updates.checkForUpdateAsync();
             if (update.isAvailable) {
-                ToastModal('Actualizando...', 'Se esta descargando una nueva actualización','WARNING');
                 await Updates.fetchUpdateAsync();
                 await Updates.reloadAsync();
             }
-            ToastModal('Actualizado', 'Se actualizo correctamente','SUCCESS');
-        } catch (e) {
-            LOGGER.error(e);
+        } catch (error) {
+            ToastModal('Error de actualizacion', `Error fetching latest Expo update: ${error}`,'DANGER');
         }
     }
 
