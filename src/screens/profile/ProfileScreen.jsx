@@ -6,10 +6,24 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import SectionsComponent from "./components/SectionsComponent";
 import {useAuth} from "../../context/AuthContext";
+import {ToastModal} from "../../utils/Alerts";
+
 
 const ProfileScreen = () => {
 
     const {SignOut, userToken} = useAuth();
+
+    async function onFetchUpdateAsync() {
+        try {
+            const update = await Updates.checkForUpdateAsync();
+            if (update.isAvailable) {
+                await Updates.fetchUpdateAsync();
+                await Updates.reloadAsync();
+            }
+        } catch (error) {
+            ToastModal('Error de actualizacion', `Error fetching latest Expo update: ${error}`,'DANGER');
+        }
+    }
 
     return (
         <ScrollView
@@ -20,11 +34,17 @@ const ProfileScreen = () => {
             <View style={styles.container}>
                 <View style={styles.col}>
                     <CardProfileComponent name={userToken?.name} email={userToken?.email}/>
+                    <CardOptionsComponent
+                        icon={<MaterialCommunityIcons name="logout" size={24} color="white" />}
+                        text={'Buscar Actualización'}
+
+                    />
 
                     <SectionsComponent title={'Ajustes y preferencias'}/>
                     <CardOptionsComponent
-                        icon={<Ionicons name="notifications" size={24} color="white" />}
+                        icon={<MaterialCommunityIcons name="update" size={24} color="white" />}
                         text={'Notificaciones'}
+                        functions={async () => {onFetchUpdateAsync()}}
                     />
                     <CardOptionsComponent
                         icon={<Ionicons name="language" size={24} color="white" />}
