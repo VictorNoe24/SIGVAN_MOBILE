@@ -1,9 +1,9 @@
 import React from 'react';
 import {createStackNavigator} from "@react-navigation/stack";
-import CategoryScreen from "../screens/options/category/CategoryScreen";
-import ProductScreen from "../screens/options/product/ProductScreen";
-import AddCategoryScreen from "../screens/options/category/AddCategoryScreen";
-import AddProductScreen from "../screens/options/product/AddProductScreen";
+import CategoryScreen from "../screens/category/CategoryScreen";
+import ProductScreen from "../screens/products/ProductScreen";
+import AddCategoryScreen from "../screens/category/AddCategoryScreen";
+import AddProductScreen from "../screens/products/AddProductScreen";
 
 const Stack = createStackNavigator();
 
