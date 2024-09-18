@@ -1,12 +1,12 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {ScrollView, StyleSheet, View} from "react-native";
-import ButtonFloatComponent from "../../../components/ButtonFloatComponent";
-import {getAllCategory} from "../../../db/apis/API_CATEGORY";
-import {LOGGER} from "../../../utils/env";
+import ButtonFloatComponent from "../../components/ButtonFloatComponent";
+import {getAllCategory} from "../../db/apis/API_CATEGORY";
+import {LOGGER} from "../../utils/env";
 import CardCategoryComponent from "./components/CardCategoryComponent";
-import NoSearchComponent from "../../../components/NoSearchComponent";
+import NoSearchComponent from "../../components/NoSearchComponent";
 import {useFocusEffect} from "@react-navigation/native";
-import SearchInputComponent from "../../../components/SearchInputComponent";
+import SearchInputComponent from "../../components/SearchInputComponent";
 
 const CategoryScreen = ({ navigation }) => {
 

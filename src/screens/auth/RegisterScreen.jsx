@@ -11,6 +11,8 @@ import {
     validatePassword, validatePasswordConfirm,
     validatePhoneNumber
 } from "../../utils/validate";
+import {ToastModal} from "../../utils/Alerts";
+import {LOGGER} from "../../utils/env";
 
 const log = logger.createLogger();
 
@@ -29,11 +31,11 @@ const RegisterScreen = () => {
             setState(true)
             const response = await registerAPI(name, lastname, phone, email, password, 1);
             if (response !== undefined && response !== null) {
-
+                return ToastModal('Registrado', 'Se a registrado tu usuario','SUCCESS');
             }
-            log.info(response)
+            ToastModal('Fallo de registro', 'No se a podido registrar el usuario','DANGER');
         } catch (e) {
-            log.error(e);
+            LOGGER.error(e);
         } finally {
             setState(false)
         }

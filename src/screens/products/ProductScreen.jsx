@@ -1,13 +1,13 @@
 import React, {useCallback, useEffect, useState} from "react";
 import {ScrollView, StyleSheet, View} from "react-native";
-import ButtonFloatComponent from "../../../components/ButtonFloatComponent";
+import ButtonFloatComponent from "../../components/ButtonFloatComponent";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import CardCategoryComponent from "../category/components/CardCategoryComponent";
-import NoSearchComponent from "../../../components/NoSearchComponent";
-import SearchInputComponent from "../../../components/SearchInputComponent";
+import NoSearchComponent from "../../components/NoSearchComponent";
+import SearchInputComponent from "../../components/SearchInputComponent";
 import {useFocusEffect} from "@react-navigation/native";
-import {getAllProducts} from "../../../db/apis/API_PRODUCTS";
-import {LOGGER} from "../../../utils/env";
+import {getAllProducts} from "../../db/apis/API_PRODUCTS";
+import {LOGGER} from "../../utils/env";
 
 const ProductScreen = () => {
 

@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import {ScrollView, StyleSheet, View} from "react-native";
-import InputComponent from "../../../components/InputComponent";
-import {validateName} from "../../../utils/validate";
-import ButtonComponent from "../../../components/ButtonComponent";
-import {insertCategory} from "../../../db/apis/API_CATEGORY";
-import {LOGGER} from "../../../utils/env";
+import InputComponent from "../../components/InputComponent";
+import {validateName} from "../../utils/validate";
+import ButtonComponent from "../../components/ButtonComponent";
+import {insertCategory} from "../../db/apis/API_CATEGORY";
+import {LOGGER} from "../../utils/env";
 import {useNavigation} from "@react-navigation/native";
-import {ToastModal} from "../../../utils/Alerts";
+import {ToastModal} from "../../utils/Alerts";
 
 const AddCategoryScreen = () => {
 
