@@ -1,8 +1,7 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {ScrollView, StyleSheet, Text, View} from "react-native";
 import ButtonComponent from "../../components/ButtonComponent";
 import InputComponent from "../../components/InputComponent";
-import { logger } from "react-native-logs";
 import {registerAPI} from "../../db/apis/API_AUTH";
 import {
     validateEmail,
@@ -13,8 +12,8 @@ import {
 } from "../../utils/validate";
 import {ToastModal} from "../../utils/Alerts";
 import {LOGGER} from "../../utils/env";
-
-const log = logger.createLogger();
+import {useFocusEffect, useNavigation} from "@react-navigation/native";
+import {useAuth} from "../../context/AuthContext";
 
 const RegisterScreen = () => {
 
@@ -26,14 +25,40 @@ const RegisterScreen = () => {
     const [valiPassword, setValiPassword] = useState(null)
     const [state, setState] = useState(false)
 
+    const navigation = useNavigation()
+    const { userInfo, setUserInfo } = useAuth();
+
+    const infoUser = () => {
+        if(userInfo.length !== 0){
+            setName(userInfo[0].name)
+            setLastname(userInfo[0].lastname)
+            setPhone(userInfo[0].phone)
+            setEmail(userInfo[0].email)
+            setPassword(userInfo[0].password)
+            setValiPassword(userInfo[0].password)
+        }
+    }
+
     const insertUser = async () => {
         try {
             setState(true)
-            const response = await registerAPI(name, lastname, phone, email, password, 1);
-            if (response !== undefined && response !== null) {
-                return ToastModal('Registrado', 'Se a registrado tu usuario','SUCCESS');
+            if(userInfo.length !== 0) {
+                return navigation.navigate('SinUpCompany')
             }
-            ToastModal('Fallo de registro', 'No se a podido registrar el usuario','DANGER');
+            const response = await registerAPI(name, lastname, phone, email, password, 1);
+            if (response !== undefined && response != null) {
+                setUserInfo([{
+                    name,
+                    lastname,
+                    phone,
+                    email,
+                    password,
+                    'idUser': response,
+                }])
+                navigation.navigate('SinUpCompany')
+                return
+            }
+            ToastModal('Alerta', 'No se a podido registrar el usuario','WARNING');
         } catch (e) {
             LOGGER.error(e);
         } finally {
@@ -47,6 +72,12 @@ const RegisterScreen = () => {
         }
         return true;
     }
+
+    useFocusEffect(
+        useCallback(() => {
+            infoUser();
+        }, [])
+    )
 
     return (
         <ScrollView>
@@ -121,7 +152,7 @@ const RegisterScreen = () => {
                 <ButtonComponent
                     text={'Siguiente'}
                     disable={state}
-                    func={()=>insertUser()}
+                    func={async ()=>insertUser()}
                 />
             </View>
         </ScrollView>

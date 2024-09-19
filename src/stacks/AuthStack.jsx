@@ -9,6 +9,7 @@ import {CreateTables, CreateTriggers} from "../db/database";
 import {LOGGER} from "../utils/env";
 import AddStack from "./AddStack";
 import SearchStack from "./SearchStack";
+import RegisterCompanyScreen from "../screens/auth/RegisterCompanyScreen";
 
 const Stack = createStackNavigator();
 
@@ -51,6 +52,14 @@ const AuthStacks = () => {
                         component={RegisterScreen}
                         options={{
                             headerTitle: 'Registrar Usuario',
+                            headerTitleAlign: 'center',
+                        }}
+                    />
+                    <Stack.Screen
+                        name='SinUpCompany'
+                        component={RegisterCompanyScreen}
+                        options={{
+                            headerTitle: 'Registrar tu Empresa',
                             headerTitleAlign: 'center',
                         }}
                     />

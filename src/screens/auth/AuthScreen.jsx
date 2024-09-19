@@ -1,10 +1,10 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState, useRef, useEffect, useCallback} from 'react';
 import {Animated, Image, StyleSheet, Text, View} from "react-native";
 import InputComponent from "../../components/InputComponent";
 import ButtonComponent from "../../components/ButtonComponent";
 import Checkbox from 'expo-checkbox';
 import {useAuth} from "../../context/AuthContext";
-import {useNavigation} from "@react-navigation/native";
+import {useFocusEffect, useNavigation} from "@react-navigation/native";
 import {validateEmail, validatePassword} from "../../utils/validate";
 import {loginAPI} from "../../db/apis/API_AUTH";
 import {LOGGER} from "../../utils/env";
@@ -16,7 +16,7 @@ const AuthScreen = () => {
     const [password, setPassword] = useState(null);
     const [isChecked, setChecked] = useState(false);
     const [state, setState] = useState(false)
-    const {setUserToken, SignIn, Storage} = useAuth();
+    const {setUserToken, SignIn, Storage, setUserInfo} = useAuth();
 
     const fadeAnim = useRef(new Animated.Value(0)).current;
 
@@ -34,6 +34,7 @@ const AuthScreen = () => {
             const response = await loginAPI(email, password);
             if (response !== undefined && response !== null) {
                 setUserToken(response);
+                setUserInfo([])
                 return await Storage(response)
             }
             ToastModal('Fallo de login', 'Correo o contraseña incorrecta','DANGER');
@@ -51,6 +52,12 @@ const AuthScreen = () => {
         }
         return true;
     };
+
+    useFocusEffect(
+        useCallback(()=>{
+            setUserInfo([])
+        },[])
+    )
 
     useEffect(() => {
         openLogo();

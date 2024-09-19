@@ -36,3 +36,13 @@ export const validateInteger = (number) => {
     const integerRegex = /^-?\d+$/;
     return integerRegex.test(number);
 }
+
+export const validateAddress = (address) => {
+    const addressRegex = /^[A-Za-z0-9ÁÉÍÓÚáéíóúñÑ'`.,#\- ]+$/;
+    return addressRegex.test(address) && address.length >= 5 && address.length <= 200;
+}
+
+export const validateCountry = (country) => {
+    const countryRegex = /^[A-Za-zÁÉÍÓÚáéíóúñÑ'`-]+(?: [A-Za-zÁÉÍÓÚáéíóúñÑ'`-]+)*$/;
+    return countryRegex.test(country) && country.length >= 2 && country.length <= 100;
+}
