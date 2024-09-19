@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {ScrollView, StyleSheet, Text, View} from "react-native";
 import ButtonComponent from "../../components/ButtonComponent";
 import InputComponent from "../../components/InputComponent";
-import { logger } from "react-native-logs";
 import {registerAPI} from "../../db/apis/API_AUTH";
 import {
     validateEmail,
@@ -13,8 +12,7 @@ import {
 } from "../../utils/validate";
 import {ToastModal} from "../../utils/Alerts";
 import {LOGGER} from "../../utils/env";
-
-const log = logger.createLogger();
+import {useNavigation} from "@react-navigation/native";
 
 const RegisterScreen = () => {
 
@@ -26,14 +24,18 @@ const RegisterScreen = () => {
     const [valiPassword, setValiPassword] = useState(null)
     const [state, setState] = useState(false)
 
+    const navigation = useNavigation()
+
     const insertUser = async () => {
         try {
             setState(true)
             const response = await registerAPI(name, lastname, phone, email, password, 1);
-            if (response !== undefined && response !== null) {
-                return ToastModal('Registrado', 'Se a registrado tu usuario','SUCCESS');
+            if (response !== undefined && response != null) {
+                ToastModal('Registrado', 'Se a registrado tu usuario','SUCCESS');
+                navigation.navigate()
+                return
             }
-            ToastModal('Fallo de registro', 'No se a podido registrar el usuario','DANGER');
+            ToastModal('Alerta', 'No se a podido registrar el usuario','WARNING');
         } catch (e) {
             LOGGER.error(e);
         } finally {

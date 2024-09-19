@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ScrollView, StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
-import * as ImagePicker from 'expo-image-picker';  // Importa ImagePicker
+import * as ImagePicker from 'expo-image-picker';
 import { LOGGER } from "../../utils/env";
 import InputComponent from "../../components/InputComponent";
 import { validateInteger, validateName, validatePrice } from "../../utils/validate";
