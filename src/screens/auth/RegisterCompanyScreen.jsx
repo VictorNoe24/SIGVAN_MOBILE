@@ -7,10 +7,11 @@ import {validateAddress, validateCountry, validateName} from "../../utils/valida
 import {LOGGER} from "../../utils/env";
 import {ToastModal} from "../../utils/Alerts";
 import Checkbox from "expo-checkbox";
-import {registerAPI} from "../../db/apis/API_AUTH";
 import {useNavigation} from "@react-navigation/native";
+import {insertCompany} from "../../db/apis/API_COMPANY";
+import {useAuth} from "../../context/AuthContext";
 
-const RegisterCompanyScreen = ({id}) => {
+const RegisterCompanyScreen = () => {
 
     const [image, setImage] = useState(null)
     const [name, setName] = useState(null)
@@ -20,17 +21,28 @@ const RegisterCompanyScreen = ({id}) => {
     const [state, setState] = useState(false)
 
     const navigation= useNavigation();
+    const {userInfo, setUserInfo} = useAuth();
 
-    const insertCompany = async () => {
+    const registerCompany = async () => {
         try {
             setState(true)
+            const company = {
+                image,
+                name,
+                country,
+                address,
+                'id': userInfo[0].idUser
+            }
+            console.log(company)
             if(!check || name === null || country === null || address === null || image === null) {
                 return ToastModal('Alerta', 'No se a podido registrar la empresa','WARNING');
             }
-            const response  = await registerAPI();
+            const response  = await insertCompany(company);
+            console.log(response)
             if ( response !== undefined && response != null ) {
                 ToastModal('Registrado', 'Se a registrado tus datos','SUCCESS')
-                return navigation.navigate({screen: 'SignIn'});
+                setUserInfo([])
+                return navigation.navigate('SignIn');
             }
 
         } catch (e) {
@@ -93,7 +105,7 @@ const RegisterCompanyScreen = ({id}) => {
                     <ButtonComponent
                         text={'Registrar'}
                         disable={state}
-                        func={()=>insertCompany()}
+                        func={()=>registerCompany()}
                     />
                 </View>
             </ScrollView>

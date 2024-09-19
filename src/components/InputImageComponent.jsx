@@ -74,7 +74,9 @@ const styles = StyleSheet.create({
     image: {
         height: 120,
         width: 120,
-        borderRadius: 100
+        borderRadius: 100,
+        borderWidth: 1,
+        borderColor: '#adadad',
     }
 })
 

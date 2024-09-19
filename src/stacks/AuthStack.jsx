@@ -41,14 +41,6 @@ const AuthStacks = () => {
             {userToken === null ? (
                 <>
                     <Stack.Screen
-                        name='SinUpCompany'
-                        component={RegisterCompanyScreen}
-                        options={{
-                            headerTitle: 'Registrar tu Empresa',
-                            headerTitleAlign: 'center',
-                        }}
-                    />
-                    <Stack.Screen
                         name="SignIn"
                         component={AuthScreen}
                         options={{
@@ -63,7 +55,14 @@ const AuthStacks = () => {
                             headerTitleAlign: 'center',
                         }}
                     />
-
+                    <Stack.Screen
+                        name='SinUpCompany'
+                        component={RegisterCompanyScreen}
+                        options={{
+                            headerTitle: 'Registrar tu Empresa',
+                            headerTitleAlign: 'center',
+                        }}
+                    />
                     <Stack.Screen
                         name="Recovery"
                         component={AuthScreen}
